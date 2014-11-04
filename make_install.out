@@ -1,0 +1,977 @@
+make -C src install
+make[1]: Entering directory `/home/shivam/Courses/cs631/postgresql/src'
+make -C common install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Nothing to be done for `submake-errcodes'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 644  libpgcommon.a '/home/shivam/Courses/cs631/postgresql/install/lib/libpgcommon.a'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C port install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Nothing to be done for `submake-errcodes'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 644  libpgport.a '/home/shivam/Courses/cs631/postgresql/install/lib/libpgport.a'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C timezone install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/timezone'
+make -C ../../src/port all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../src/common all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share'
+./zic -d '/home/shivam/Courses/cs631/postgresql/install/share/timezone' -p 'US/Eastern' ./data/africa ./data/antarctica ./data/asia ./data/australasia ./data/europe ./data/northamerica ./data/southamerica ./data/pacificnew ./data/etcetera ./data/factory ./data/backward ./data/systemv
+make -C tznames install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/timezone/tznames'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share/timezonesets'
+/usr/bin/install -c -m 644 ./Africa.txt ./America.txt ./Antarctica.txt ./Asia.txt ./Atlantic.txt ./Australia.txt ./Etc.txt ./Europe.txt ./Indian.txt ./Pacific.txt '/home/shivam/Courses/cs631/postgresql/install/share/timezonesets'
+/usr/bin/install -c -m 644 ./Default ./Australia ./India '/home/shivam/Courses/cs631/postgresql/install/share/timezonesets'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/timezone/tznames'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/timezone'
+make -C backend install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make -C ../../src/port all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../src/common all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C catalog schemapg.h
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make[3]: `schemapg.h' is up to date.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make -C access all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access'
+make -C common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/common'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/common'
+make -C gin all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/gin'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/gin'
+make -C gist all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/gist'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/gist'
+make -C hash all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/hash'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/hash'
+make -C heap all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/heap'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/heap'
+make -C index all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/index'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/index'
+make -C nbtree all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/nbtree'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/nbtree'
+make -C rmgrdesc all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/rmgrdesc'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/rmgrdesc'
+make -C spgist all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/spgist'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/spgist'
+make -C transam all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/transam'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access/transam'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/access'
+make -C bootstrap all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/bootstrap'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/bootstrap'
+make -C catalog all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make -C parser all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
+make -C commands all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/commands'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/commands'
+make -C executor all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/executor'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/executor'
+make -C foreign all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/foreign'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/foreign'
+make -C lib all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/lib'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/lib'
+make -C libpq all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/libpq'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/libpq'
+make -C main all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/main'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/main'
+make -C nodes all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/nodes'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/nodes'
+make -C optimizer all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer'
+make -C geqo all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/geqo'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/geqo'
+make -C path all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/path'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/path'
+make -C plan all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/plan'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/plan'
+make -C prep all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/prep'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/prep'
+make -C util all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/util'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer/util'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/optimizer'
+make -C port all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/port'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/port'
+make -C postmaster all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/postmaster'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/postmaster'
+make -C regex all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/regex'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/regex'
+make -C replication all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/replication'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/replication'
+make -C rewrite all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/rewrite'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/rewrite'
+make -C storage all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage'
+make -C buffer all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/buffer'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/buffer'
+make -C file all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/file'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/file'
+make -C freespace all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/freespace'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/freespace'
+make -C ipc all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/ipc'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/ipc'
+make -C large_object all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/large_object'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/large_object'
+make -C lmgr all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/lmgr'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/lmgr'
+make -C page all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/page'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/page'
+make -C smgr all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/smgr'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage/smgr'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/storage'
+make -C tcop all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/tcop'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/tcop'
+make -C tsearch all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/tsearch'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/tsearch'
+make -C utils all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils'
+make -C adt all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/adt'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/adt'
+make -C cache all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/cache'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/cache'
+make -C error all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/error'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/error'
+make -C fmgr all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/fmgr'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/fmgr'
+make -C hash all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/hash'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/hash'
+make -C init all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/init'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/init'
+make -C mb all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb'
+make -C misc all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/misc'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/misc'
+make -C mmgr all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mmgr'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mmgr'
+make -C resowner all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/resowner'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/resowner'
+make -C sort all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/sort'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/sort'
+make -C time all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/time'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/time'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils'
+make -C ../../src/timezone all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/timezone'
+make -C ../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/timezone'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin' '/home/shivam/Courses/cs631/postgresql/install/share'
+/usr/bin/install -c  postgres '/home/shivam/Courses/cs631/postgresql/install/bin/postgres'
+ln -s postgres '/home/shivam/Courses/cs631/postgresql/install/bin/postmaster'
+make -C catalog install-data
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share'
+/usr/bin/install -c -m 644 `for f in ./postgres.bki; do test -r $f && echo $f && break; done` '/home/shivam/Courses/cs631/postgresql/install/share/postgres.bki'
+/usr/bin/install -c -m 644 `for f in ./postgres.description; do test -r $f && echo $f && break; done` '/home/shivam/Courses/cs631/postgresql/install/share/postgres.description'
+/usr/bin/install -c -m 644 `for f in ./postgres.shdescription; do test -r $f && echo $f && break; done` '/home/shivam/Courses/cs631/postgresql/install/share/postgres.shdescription'
+/usr/bin/install -c -m 644 ./system_views.sql '/home/shivam/Courses/cs631/postgresql/install/share/system_views.sql'
+/usr/bin/install -c -m 644 ./information_schema.sql '/home/shivam/Courses/cs631/postgresql/install/share/information_schema.sql'
+/usr/bin/install -c -m 644 ./sql_features.txt '/home/shivam/Courses/cs631/postgresql/install/share/sql_features.txt'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make -C tsearch install-data
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/tsearch'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share' '/home/shivam/Courses/cs631/postgresql/install/share/tsearch_data'
+/usr/bin/install -c -m 644 ./synonym_sample.syn ./thesaurus_sample.ths ./hunspell_sample.affix ./ispell_sample.affix ./ispell_sample.dict '/home/shivam/Courses/cs631/postgresql/install/share/tsearch_data/'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/tsearch'
+/usr/bin/install -c -m 644 ./libpq/pg_hba.conf.sample '/home/shivam/Courses/cs631/postgresql/install/share/pg_hba.conf.sample'
+/usr/bin/install -c -m 644 ./libpq/pg_ident.conf.sample '/home/shivam/Courses/cs631/postgresql/install/share/pg_ident.conf.sample'
+/usr/bin/install -c -m 644 ./utils/misc/postgresql.conf.sample '/home/shivam/Courses/cs631/postgresql/install/share/postgresql.conf.sample'
+/usr/bin/install -c -m 644 ./access/transam/recovery.conf.sample '/home/shivam/Courses/cs631/postgresql/install/share/recovery.conf.sample'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make -C backend/utils/mb/conversion_procs install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs'
+make -C ascii_and_mic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/ascii_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/ascii_and_mic'
+make -C cyrillic_and_mic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/cyrillic_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/cyrillic_and_mic'
+make -C euc_cn_and_mic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_cn_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_cn_and_mic'
+make -C euc_jp_and_sjis installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_jp_and_sjis'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_jp_and_sjis'
+make -C euc_kr_and_mic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_kr_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_kr_and_mic'
+make -C euc_tw_and_big5 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_tw_and_big5'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_tw_and_big5'
+make -C latin2_and_win1250 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin2_and_win1250'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin2_and_win1250'
+make -C latin_and_mic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin_and_mic'
+make -C utf8_and_ascii installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_ascii'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_ascii'
+make -C utf8_and_big5 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_big5'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_big5'
+make -C utf8_and_cyrillic installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_cyrillic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_cyrillic'
+make -C utf8_and_euc_cn installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_cn'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_cn'
+make -C utf8_and_euc_jp installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_jp'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_jp'
+make -C utf8_and_euc_kr installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_kr'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_kr'
+make -C utf8_and_euc_tw installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_tw'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_tw'
+make -C utf8_and_gb18030 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gb18030'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gb18030'
+make -C utf8_and_gbk installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gbk'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gbk'
+make -C utf8_and_iso8859 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859'
+make -C utf8_and_iso8859_1 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859_1'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859_1'
+make -C utf8_and_johab installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_johab'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_johab'
+make -C utf8_and_sjis installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis'
+make -C utf8_and_win installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_win'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_win'
+make -C utf8_and_uhc installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_uhc'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_uhc'
+make -C utf8_and_euc2004 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc2004'
+make -C utf8_and_sjis2004 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis2004'
+make -C euc2004_sjis2004 installdirs
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc2004_sjis2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc2004_sjis2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share' '/home/shivam/Courses/cs631/postgresql/install/lib'
+make -C ascii_and_mic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/ascii_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  ascii_and_mic.so '/home/shivam/Courses/cs631/postgresql/install/lib/ascii_and_mic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/ascii_and_mic'
+make -C cyrillic_and_mic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/cyrillic_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  cyrillic_and_mic.so '/home/shivam/Courses/cs631/postgresql/install/lib/cyrillic_and_mic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/cyrillic_and_mic'
+make -C euc_cn_and_mic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_cn_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  euc_cn_and_mic.so '/home/shivam/Courses/cs631/postgresql/install/lib/euc_cn_and_mic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_cn_and_mic'
+make -C euc_jp_and_sjis install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_jp_and_sjis'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  euc_jp_and_sjis.so '/home/shivam/Courses/cs631/postgresql/install/lib/euc_jp_and_sjis.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_jp_and_sjis'
+make -C euc_kr_and_mic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_kr_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  euc_kr_and_mic.so '/home/shivam/Courses/cs631/postgresql/install/lib/euc_kr_and_mic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_kr_and_mic'
+make -C euc_tw_and_big5 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_tw_and_big5'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  euc_tw_and_big5.so '/home/shivam/Courses/cs631/postgresql/install/lib/euc_tw_and_big5.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc_tw_and_big5'
+make -C latin2_and_win1250 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin2_and_win1250'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  latin2_and_win1250.so '/home/shivam/Courses/cs631/postgresql/install/lib/latin2_and_win1250.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin2_and_win1250'
+make -C latin_and_mic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin_and_mic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  latin_and_mic.so '/home/shivam/Courses/cs631/postgresql/install/lib/latin_and_mic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/latin_and_mic'
+make -C utf8_and_ascii install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_ascii'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_ascii.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_ascii.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_ascii'
+make -C utf8_and_big5 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_big5'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_big5.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_big5.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_big5'
+make -C utf8_and_cyrillic install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_cyrillic'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_cyrillic.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_cyrillic.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_cyrillic'
+make -C utf8_and_euc_cn install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_cn'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_euc_cn.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_euc_cn.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_cn'
+make -C utf8_and_euc_jp install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_jp'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_euc_jp.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_euc_jp.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_jp'
+make -C utf8_and_euc_kr install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_kr'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_euc_kr.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_euc_kr.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_kr'
+make -C utf8_and_euc_tw install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_tw'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_euc_tw.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_euc_tw.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc_tw'
+make -C utf8_and_gb18030 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gb18030'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_gb18030.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_gb18030.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gb18030'
+make -C utf8_and_gbk install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gbk'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_gbk.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_gbk.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_gbk'
+make -C utf8_and_iso8859 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_iso8859.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_iso8859.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859'
+make -C utf8_and_iso8859_1 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859_1'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_iso8859_1.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_iso8859_1.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_iso8859_1'
+make -C utf8_and_johab install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_johab'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_johab.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_johab.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_johab'
+make -C utf8_and_sjis install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_sjis.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_sjis.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis'
+make -C utf8_and_win install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_win'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_win.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_win.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_win'
+make -C utf8_and_uhc install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_uhc'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_uhc.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_uhc.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_uhc'
+make -C utf8_and_euc2004 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_euc2004.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_euc2004.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_euc2004'
+make -C utf8_and_sjis2004 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  utf8_and_sjis2004.so '/home/shivam/Courses/cs631/postgresql/install/lib/utf8_and_sjis2004.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/utf8_and_sjis2004'
+make -C euc2004_sjis2004 install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc2004_sjis2004'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  euc2004_sjis2004.so '/home/shivam/Courses/cs631/postgresql/install/lib/euc2004_sjis2004.so'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs/euc2004_sjis2004'
+/usr/bin/install -c -m 644 conversion_create.sql '/home/shivam/Courses/cs631/postgresql/install/share'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/utils/mb/conversion_procs'
+make -C backend/snowball install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/snowball'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share' '/home/shivam/Courses/cs631/postgresql/install/share/tsearch_data'
+/usr/bin/install -c -m 755  dict_snowball.so '/home/shivam/Courses/cs631/postgresql/install/lib/dict_snowball.so'
+/usr/bin/install -c -m 644 snowball_create.sql '/home/shivam/Courses/cs631/postgresql/install/share'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/snowball'
+make -C include install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/include'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/include/libpq' '/home/shivam/Courses/cs631/postgresql/install/include/internal/libpq'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/include/server'/access '/home/shivam/Courses/cs631/postgresql/install/include/server'/bootstrap '/home/shivam/Courses/cs631/postgresql/install/include/server'/catalog '/home/shivam/Courses/cs631/postgresql/install/include/server'/commands '/home/shivam/Courses/cs631/postgresql/install/include/server'/common '/home/shivam/Courses/cs631/postgresql/install/include/server'/datatype '/home/shivam/Courses/cs631/postgresql/install/include/server'/executor '/home/shivam/Courses/cs631/postgresql/install/include/server'/foreign '/home/shivam/Courses/cs631/postgresql/install/include/server'/lib '/home/shivam/Courses/cs631/postgresql/install/include/server'/libpq '/home/shivam/Courses/cs631/postgresql/install/include/server'/mb '/home/shivam/Courses/cs631/postgresql/install/include/server'/nodes '/home/shivam/Courses/cs631/postgresql/install/include/server'/optimizer '/home/shivam/Courses/cs631/postgresql/install/include/server'/parser '/home/shivam/Courses/cs631/postgresql/install/include/server'/postmaster '/home/shivam/Courses/cs631/postgresql/install/include/server'/regex '/home/shivam/Courses/cs631/postgresql/install/include/server'/replication '/home/shivam/Courses/cs631/postgresql/install/include/server'/rewrite '/home/shivam/Courses/cs631/postgresql/install/include/server'/storage '/home/shivam/Courses/cs631/postgresql/install/include/server'/tcop '/home/shivam/Courses/cs631/postgresql/install/include/server'/snowball '/home/shivam/Courses/cs631/postgresql/install/include/server'/snowball/libstemmer '/home/shivam/Courses/cs631/postgresql/install/include/server'/tsearch '/home/shivam/Courses/cs631/postgresql/install/include/server'/tsearch/dicts '/home/shivam/Courses/cs631/postgresql/install/include/server'/utils '/home/shivam/Courses/cs631/postgresql/install/include/server'/port '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32 '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32_msvc '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32_msvc/sys '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32/arpa '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32/netinet '/home/shivam/Courses/cs631/postgresql/install/include/server'/port/win32/sys '/home/shivam/Courses/cs631/postgresql/install/include/server'/portability
+/usr/bin/install -c -m 644 ./postgres_ext.h   '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 ./libpq/libpq-fs.h '/home/shivam/Courses/cs631/postgresql/install/include/libpq'
+/usr/bin/install -c -m 644 pg_config.h     '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 pg_config_ext.h '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 pg_config_os.h  '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 ./pg_config_manual.h '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 ./c.h            '/home/shivam/Courses/cs631/postgresql/install/include/internal'
+/usr/bin/install -c -m 644 ./port.h         '/home/shivam/Courses/cs631/postgresql/install/include/internal'
+/usr/bin/install -c -m 644 ./postgres_fe.h  '/home/shivam/Courses/cs631/postgresql/install/include/internal'
+/usr/bin/install -c -m 644 ./libpq/pqcomm.h '/home/shivam/Courses/cs631/postgresql/install/include/internal/libpq'
+/usr/bin/install -c -m 644 pg_config.h     '/home/shivam/Courses/cs631/postgresql/install/include/server'
+/usr/bin/install -c -m 644 pg_config_ext.h '/home/shivam/Courses/cs631/postgresql/install/include/server'
+/usr/bin/install -c -m 644 pg_config_os.h  '/home/shivam/Courses/cs631/postgresql/install/include/server'
+/usr/bin/install -c -m 644 utils/errcodes.h '/home/shivam/Courses/cs631/postgresql/install/include/server/utils'
+/usr/bin/install -c -m 644 utils/fmgroids.h '/home/shivam/Courses/cs631/postgresql/install/include/server/utils'
+cp ./*.h '/home/shivam/Courses/cs631/postgresql/install/include/server'/ || exit; \
+	chmod 644 '/home/shivam/Courses/cs631/postgresql/install/include/server'/*.h  || exit; \
+	for dir in access bootstrap catalog commands common datatype executor foreign lib libpq mb nodes optimizer parser postmaster regex replication rewrite storage tcop snowball snowball/libstemmer tsearch tsearch/dicts utils port port/win32 port/win32_msvc port/win32_msvc/sys port/win32/arpa port/win32/netinet port/win32/sys portability; do \
+	  cp ./$dir/*.h '/home/shivam/Courses/cs631/postgresql/install/include/server'/$dir/ || exit; \
+	  chmod 644 '/home/shivam/Courses/cs631/postgresql/install/include/server'/$dir/*.h  || exit; \
+	done
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/include'
+make -C interfaces install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces'
+make -C libpq install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib' '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/include' '/home/shivam/Courses/cs631/postgresql/install/include/internal' '/home/shivam/Courses/cs631/postgresql/install/share'
+/usr/bin/install -c -m 755  libpq.so.5.6 '/home/shivam/Courses/cs631/postgresql/install/lib/libpq.so.5.6'
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libpq.so.5 && \
+	ln -s libpq.so.5.6 libpq.so.5
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libpq.so && \
+	ln -s libpq.so.5.6 libpq.so
+/usr/bin/install -c -m 644  libpq.a '/home/shivam/Courses/cs631/postgresql/install/lib/libpq.a'
+/usr/bin/install -c -m 644 libpq.pc '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig/libpq.pc'
+/usr/bin/install -c -m 644 ./libpq-fe.h '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 ./libpq-events.h '/home/shivam/Courses/cs631/postgresql/install/include'
+/usr/bin/install -c -m 644 ./libpq-int.h '/home/shivam/Courses/cs631/postgresql/install/include/internal'
+/usr/bin/install -c -m 644 ./pqexpbuffer.h '/home/shivam/Courses/cs631/postgresql/install/include/internal'
+/usr/bin/install -c -m 644 ./pg_service.conf.sample '/home/shivam/Courses/cs631/postgresql/install/share/pg_service.conf.sample'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ecpg install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg'
+make -C include install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/include'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/include' '/home/shivam/Courses/cs631/postgresql/install/include/informix/esql'
+/usr/bin/install -c -m 644 ./ecpgerrno.h ./ecpglib.h ./ecpgtype.h ./sqlca.h ./sql3types.h ./ecpg_informix.h ./pgtypes_error.h ./pgtypes_numeric.h ./pgtypes_timestamp.h ./pgtypes_date.h ./pgtypes_interval.h ./sqlda.h ./sqlda-compat.h ./sqlda-native.h '/home/shivam/Courses/cs631/postgresql/install/include/'
+/usr/bin/install -c -m 644 ./datetime.h ./decimal.h ./sqltypes.h '/home/shivam/Courses/cs631/postgresql/install/include/informix/esql/'
+/usr/bin/install -c -m 644 ../../../../src/interfaces/ecpg/include/ecpg_config.h '/home/shivam/Courses/cs631/postgresql/install/include'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/include'
+make -C pgtypeslib install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib' '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig'
+/usr/bin/install -c -m 755  libpgtypes.so.3.4 '/home/shivam/Courses/cs631/postgresql/install/lib/libpgtypes.so.3.4'
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libpgtypes.so.3 && \
+	ln -s libpgtypes.so.3.4 libpgtypes.so.3
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libpgtypes.so && \
+	ln -s libpgtypes.so.3.4 libpgtypes.so
+/usr/bin/install -c -m 644  libpgtypes.a '/home/shivam/Courses/cs631/postgresql/install/lib/libpgtypes.a'
+/usr/bin/install -c -m 644 libpgtypes.pc '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig/libpgtypes.pc'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+make -C ecpglib install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/ecpglib'
+make -C ../../../../src/interfaces/libpq all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../../src/interfaces/ecpg/pgtypeslib all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib' '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig'
+/usr/bin/install -c -m 755  libecpg.so.6.5 '/home/shivam/Courses/cs631/postgresql/install/lib/libecpg.so.6.5'
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libecpg.so.6 && \
+	ln -s libecpg.so.6.5 libecpg.so.6
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libecpg.so && \
+	ln -s libecpg.so.6.5 libecpg.so
+/usr/bin/install -c -m 644  libecpg.a '/home/shivam/Courses/cs631/postgresql/install/lib/libecpg.a'
+/usr/bin/install -c -m 644 libecpg.pc '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig/libecpg.pc'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/ecpglib'
+make -C compatlib install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/compatlib'
+make -C ../../../../src/interfaces/ecpg/ecpglib all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/ecpglib'
+make -C ../../../../src/interfaces/libpq all
+make[6]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[6]: Nothing to be done for `all'.
+make[6]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../../src/interfaces/ecpg/pgtypeslib all
+make[6]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+make[6]: Nothing to be done for `all'.
+make[6]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/ecpglib'
+make -C ../../../../src/interfaces/ecpg/pgtypeslib all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/pgtypeslib'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib' '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig'
+/usr/bin/install -c -m 755  libecpg_compat.so.3.5 '/home/shivam/Courses/cs631/postgresql/install/lib/libecpg_compat.so.3.5'
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libecpg_compat.so.3 && \
+	ln -s libecpg_compat.so.3.5 libecpg_compat.so.3
+cd '/home/shivam/Courses/cs631/postgresql/install/lib' && \
+	rm -f libecpg_compat.so && \
+	ln -s libecpg_compat.so.3.5 libecpg_compat.so
+/usr/bin/install -c -m 644  libecpg_compat.a '/home/shivam/Courses/cs631/postgresql/install/lib/libecpg_compat.a'
+/usr/bin/install -c -m 644 libecpg_compat.pc '/home/shivam/Courses/cs631/postgresql/install/lib/pkgconfig/libecpg_compat.pc'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/compatlib'
+make -C preproc install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/preproc'
+make -C ../../../../src/port all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[6]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[6]: Nothing to be done for `submake-errcodes'.
+make[6]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../../src/common all
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[6]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[6]: Nothing to be done for `submake-errcodes'.
+make[6]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  ecpg '/home/shivam/Courses/cs631/postgresql/install/bin'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/preproc'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces'
+make -C backend/replication/libpqwalreceiver install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/replication/libpqwalreceiver'
+make -C ../../../../src/interfaces/libpq all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  libpqwalreceiver.so '/home/shivam/Courses/cs631/postgresql/install/lib/libpqwalreceiver.so'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/replication/libpqwalreceiver'
+make -C bin install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin'
+make -C initdb install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/initdb'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  initdb '/home/shivam/Courses/cs631/postgresql/install/bin/initdb'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/initdb'
+make -C pg_ctl install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_ctl'
+make -C ../../../src/interfaces/libpq all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  pg_ctl '/home/shivam/Courses/cs631/postgresql/install/bin/pg_ctl'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_ctl'
+make -C pg_dump install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_dump'
+make -C ../../../src/interfaces/libpq all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  pg_dump '/home/shivam/Courses/cs631/postgresql/install/bin'/pg_dump
+/usr/bin/install -c  pg_restore '/home/shivam/Courses/cs631/postgresql/install/bin'/pg_restore
+/usr/bin/install -c  pg_dumpall '/home/shivam/Courses/cs631/postgresql/install/bin'/pg_dumpall
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_dump'
+make -C psql install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/psql'
+make -C ../../../src/interfaces/libpq all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin' '/home/shivam/Courses/cs631/postgresql/install/share'
+/usr/bin/install -c  psql '/home/shivam/Courses/cs631/postgresql/install/bin/psql'
+/usr/bin/install -c -m 644 ./psqlrc.sample '/home/shivam/Courses/cs631/postgresql/install/share/psqlrc.sample'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/psql'
+make -C scripts install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/scripts'
+make -C ../../../src/interfaces/libpq all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  createdb   '/home/shivam/Courses/cs631/postgresql/install/bin'/createdb
+/usr/bin/install -c  dropdb     '/home/shivam/Courses/cs631/postgresql/install/bin'/dropdb
+/usr/bin/install -c  createlang '/home/shivam/Courses/cs631/postgresql/install/bin'/createlang
+/usr/bin/install -c  droplang   '/home/shivam/Courses/cs631/postgresql/install/bin'/droplang
+/usr/bin/install -c  createuser '/home/shivam/Courses/cs631/postgresql/install/bin'/createuser
+/usr/bin/install -c  dropuser   '/home/shivam/Courses/cs631/postgresql/install/bin'/dropuser
+/usr/bin/install -c  clusterdb  '/home/shivam/Courses/cs631/postgresql/install/bin'/clusterdb
+/usr/bin/install -c  vacuumdb   '/home/shivam/Courses/cs631/postgresql/install/bin'/vacuumdb
+/usr/bin/install -c  reindexdb  '/home/shivam/Courses/cs631/postgresql/install/bin'/reindexdb
+/usr/bin/install -c  pg_isready '/home/shivam/Courses/cs631/postgresql/install/bin'/pg_isready
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/scripts'
+make -C pg_config install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_config'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c -m 755 pg_config '/home/shivam/Courses/cs631/postgresql/install/bin/pg_config'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_config'
+make -C pg_controldata install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_controldata'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  pg_controldata '/home/shivam/Courses/cs631/postgresql/install/bin/pg_controldata'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_controldata'
+make -C pg_resetxlog install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_resetxlog'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  pg_resetxlog '/home/shivam/Courses/cs631/postgresql/install/bin/pg_resetxlog'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_resetxlog'
+make -C pg_basebackup install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_basebackup'
+make -C ../../../src/interfaces/libpq all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[5]: Nothing to be done for `submake-errcodes'.
+make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/bin'
+/usr/bin/install -c  pg_basebackup '/home/shivam/Courses/cs631/postgresql/install/bin/pg_basebackup'
+/usr/bin/install -c  pg_receivexlog '/home/shivam/Courses/cs631/postgresql/install/bin/pg_receivexlog'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin/pg_basebackup'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/bin'
+make -C pl install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/pl'
+make -C plpgsql install
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/pl/plpgsql'
+make -C src install
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/pl/plpgsql/src'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib'
+/usr/bin/install -c -m 755  plpgsql.so '/home/shivam/Courses/cs631/postgresql/install/lib/plpgsql.so'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/share/extension'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/include/server'
+/usr/bin/install -c -m 644 ./plpgsql.control ./plpgsql--1.0.sql ./plpgsql--unpackaged--1.0.sql '/home/shivam/Courses/cs631/postgresql/install/share/extension/'
+/usr/bin/install -c -m 644 './plpgsql.h' '/home/shivam/Courses/cs631/postgresql/install/include/server'
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/pl/plpgsql/src'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/pl/plpgsql'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/pl'
+make -C makefiles install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/makefiles'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/makefiles'
+/usr/bin/install -c -m 644 ./pgxs.mk '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/makefiles/'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/makefiles'
+make -C test/regress install
+make[2]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/test/regress'
+make -C ../../../src/port all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/port'
+make -C ../../../src/common all
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/common'
+make -C ../backend submake-errcodes
+make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[4]: Nothing to be done for `submake-errcodes'.
+make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/test/regress'
+/usr/bin/install -c  pg_regress '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/test/regress/pg_regress'
+make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/test/regress'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src'
+/usr/bin/install -c -m 644 Makefile.global '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/Makefile.global'
+/usr/bin/install -c -m 644 Makefile.port '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/Makefile.port'
+/usr/bin/install -c -m 644 ./Makefile.shlib '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/Makefile.shlib'
+/usr/bin/install -c -m 644 ./nls-global.mk '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/src/nls-global.mk'
+make[1]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src'
+make -C config install
+make[1]: Entering directory `/home/shivam/Courses/cs631/postgresql/config'
+/bin/mkdir -p '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/config'
+/usr/bin/install -c -m 755 ./install-sh '/home/shivam/Courses/cs631/postgresql/install/lib/pgxs/config/install-sh'
+make[1]: Leaving directory `/home/shivam/Courses/cs631/postgresql/config'
+PostgreSQL installation complete.
