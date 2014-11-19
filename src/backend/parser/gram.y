@@ -333,7 +333,7 @@ static Node *makeRecursiveViewSelect(char *relname, List *aliases, Node *query);
 				target_list insert_column_list set_target_list
 				set_clause_list set_clause multiple_set_clause
 				ctext_expr_list ctext_row def_list indirection opt_indirection
-				reloption_list group_clause TriggerFuncArgs select_limit
+				reloption_list group_clause group_cube_clause TriggerFuncArgs select_limit
 				opt_select_limit opclass_item_list opclass_drop_list
 				opclass_purpose opt_opfamily transaction_mode_list_or_empty
 				OptTableFuncElementList TableFuncElementList opt_type_modifiers
@@ -9207,9 +9207,49 @@ simple_select:
 					n->fromClause = $5;
 					n->whereClause = $6;
 					n->groupClause = $7;
+
+					int l = length($3);
+					ListCell * cell = $3->head;
+					int i;
+					for(i=0;i<l;i++){
+						printf("%s AAAA\n", ((ResTarget *)(cell->data.ptr_value))->name);
+						cell = cell->next;
+					}
+					
+					l = length($7);
+
 					n->havingClause = $8;
 					n->windowClause = $9;
 					$$ = (Node *)n;
+				}
+			|
+			SELECT opt_distinct target_list
+			into_clause from_clause where_clause
+			group_cube_clause having_clause window_clause
+				{
+					SelectStmt *n = makeNode(SelectStmt);
+					n->distinctClause = $2;
+					n->targetList = $3;
+					n->intoClause = $4;
+					n->fromClause = $5;
+					n->whereClause = $6;
+					n->groupClause = $7;
+					n->havingClause = $8;
+					n->windowClause = $9;
+
+					$7 = list_delete_first($7);
+
+					SelectStmt *nn = makeNode(SelectStmt);
+					nn->distinctClause = $2;
+					nn->targetList = $3;
+					nn->intoClause = $4;
+					nn->fromClause = $5;
+					nn->whereClause = $6;
+					nn->groupClause = $7;
+					nn->havingClause = $8;
+					nn->windowClause = $9;
+
+					$$ = makeSetOp(SETOP_EXCEPT, FALSE, (Node *)n, (Node *)nn);
 				}
 			| values_clause							{ $$ = $1; }
 			| TABLE relation_expr
@@ -9501,11 +9541,11 @@ first_or_next: FIRST_P								{ $$ = 0; }
 
 group_clause:
 			GROUP_P BY expr_list					{ $$ = $3; }
-			|
-			GROUP_P BY CUBE expr_list 				{ $$ = $4; }
-			|
-			GROUP_P BY ROLLUP expr_list 			{ $$ = $4; }
 			| /*EMPTY*/								{ $$ = NIL; }
+		;
+
+group_cube_clause:
+			GROUP_P BY CUBE expr_list 				{ $$ = $4; }
 		;
 
 having_clause:
@@ -12400,6 +12440,8 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
+					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
+					strcpy($$->nameOfColumn, nodeToString($1));
 				}
 			/*
 			 * We support omitting AS only for column labels that aren't
@@ -12416,6 +12458,8 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
+					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
+					strcpy($$->nameOfColumn, nodeToString($1));
 				}
 			| a_expr
 				{
@@ -12424,6 +12468,9 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
+					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
+					strcpy($$->nameOfColumn, nodeToString($1));
+					printf("%s VED\n", $$->nameOfColumn);
 				}
 			| '*'
 				{
