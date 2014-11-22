@@ -162,6 +162,37 @@ cancel_parser_errposition_callback(ParseCallbackState *pcbstate)
 }
 
 /*
+*	Parse field names for group by cube / rollup clause
+*/
+char*
+parseFieldName(void *field, int flag)
+{
+	char *name = (char*)malloc(1000*sizeof(char));
+	if(flag==0)	strcpy(name,nodeToString(((ResTarget*)field)->val));
+	else strcpy(name,nodeToString((Node*)field));
+	int i=0, p;
+	for(i=0;name[i]!='\0';++i){
+		if(name[i]==':' && name[i+1]=='f' && name[i+2]=='i' && name[i+3]=='e' && name[i+4]=='l' && name[i+5]=='d' && name[i+6]=='s'){
+			p=i+7;
+			break;
+		}
+	}
+	int cq=0, j=0;
+	char *res=(char*)malloc(1000*sizeof(char));
+	for(i=p;name[i]!=')';++i){
+		if(name[i]=='"'){
+			if(cq>0) res[j++]='.';
+			++i;
+			while(name[i]!='"') res[j++]=name[i++];
+			++cq;
+		}
+	}
+	res[j]='\0';
+	return res;
+}
+
+
+/*
  * Error context callback for inserting parser error location.
  *
  * Note that this will be called for *any* error occurring while the
