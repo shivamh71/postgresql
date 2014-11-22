@@ -9207,20 +9207,10 @@ simple_select:
 					n->fromClause = $5;
 					n->whereClause = $6;
 					n->groupClause = $7;
-
-					int l = length($3);
-					ListCell * cell = $3->head;
-					int i;
-					for(i=0;i<l;i++){
-						printf("%s AAAA\n", ((ResTarget *)(cell->data.ptr_value))->name);
-						cell = cell->next;
-					}
-					
-					l = length($7);
-
 					n->havingClause = $8;
 					n->windowClause = $9;
 					$$ = (Node *)n;
+
 				}
 			|
 			SELECT opt_distinct target_list
@@ -12440,8 +12430,6 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
-					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
-					strcpy($$->nameOfColumn, nodeToString($1));
 				}
 			/*
 			 * We support omitting AS only for column labels that aren't
@@ -12458,8 +12446,6 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
-					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
-					strcpy($$->nameOfColumn, nodeToString($1));
 				}
 			| a_expr
 				{
@@ -12468,9 +12454,6 @@ target_el:	a_expr AS ColLabel
 					$$->indirection = NIL;
 					$$->val = (Node *)$1;
 					$$->location = @1;
-					$$->nameOfColumn = (char *)(malloc(100*sizeof(char)));
-					strcpy($$->nameOfColumn, nodeToString($1));
-					printf("%s VED\n", $$->nameOfColumn);
 				}
 			| '*'
 				{

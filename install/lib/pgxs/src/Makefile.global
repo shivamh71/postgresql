@@ -54,7 +54,7 @@ endif
 vpathsearch = `for f in $(addsuffix /$(1),$(subst :, ,. $(VPATH))); do test -r $$f && echo $$f && break; done`
 
 # Saved arguments from configure
-configure_args =  '--prefix=/home/shivam/Courses/cs631/postgresql/install' '--enable-debug'
+configure_args =  '--prefix=/home/shivam/Courses/cs631/postgresql/install'
 
 
 ##########################################################################

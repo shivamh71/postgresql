@@ -1,6 +1,10 @@
-LOG:  database system was shut down at 2014-11-04 15:05:17 IST
-LOG:  database system is ready to accept connections
+LOG:  database system was shut down at 2014-11-22 20:23:57 IST
 LOG:  autovacuum launcher started
+accept connections
+ERROR:  column "tem_name" does not exist at character 38
+STATEMENT:  select item_name from sales group by tem_name;
+ERROR:  unrecognized node type: 44767984
+STATEMENT:  select item_name, sum(quantity) from sales group by cube item_name;
 LOG:  received smart shutdown request
 LOG:  autovacuum launcher shutting down
 LOG:  shutting down

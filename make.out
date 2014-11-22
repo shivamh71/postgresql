@@ -51,6 +51,14 @@ make -C catalog schemapg.h
 make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
 make[3]: `schemapg.h' is up to date.
 make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
+make -C parser gram.h
+make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
+'/usr/bin/perl' ./check_keywords.pl gram.y ../../../src/include/parser/kwlist.h
+/usr/bin/bison -d -o gram.c gram.y
+make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
+prereqdir=`cd 'parser/' >/dev/null && pwd` && \
+	  cd '../../src/include/parser/' && rm -f gram.h && \
+	  ln -s "$prereqdir/gram.h" .
 make -C access all
 make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/access'
 make -C common all
@@ -104,7 +112,9 @@ make[3]: Nothing to be done for `all'.
 make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/catalog'
 make -C parser all
 make[3]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
-gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -I. -I. -I../../../src/include -D_GNU_SOURCE   -c -o parse_utilcmd.o parse_utilcmd.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -Wno-error -I. -I. -I../../../src/include -D_GNU_SOURCE   -c -o gram.o gram.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -I. -I. -I../../../src/include -D_GNU_SOURCE   -c -o keywords.o keywords.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -I. -I. -I../../../src/include -D_GNU_SOURCE   -c -o parser.o parser.c
 touch objfiles.txt
 make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend/parser'
 make -C commands all
@@ -453,6 +463,14 @@ make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces
 make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/compatlib'
 make -C preproc all
 make[4]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/preproc'
+'/usr/bin/perl' ./parse.pl . < ../../../backend/parser/gram.y > preproc.y
+'/usr/bin/perl' ./check_rules.pl . ../../../backend/parser/gram.y
+/usr/bin/bison -d -o preproc.c preproc.y
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -I../include -I../../../../src/interfaces/ecpg/include -I. -I. -DMAJOR_VERSION=4 -DMINOR_VERSION=9 -DPATCHLEVEL=0 -I../../../../src/include -D_GNU_SOURCE   -c -o preproc.o preproc.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -I../include -I../../../../src/interfaces/ecpg/include -I. -I. -DMAJOR_VERSION=4 -DMINOR_VERSION=9 -DPATCHLEVEL=0 -I../../../../src/include -D_GNU_SOURCE   -c -o parser.o parser.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -I../include -I../../../../src/interfaces/ecpg/include -I. -I. -DMAJOR_VERSION=4 -DMINOR_VERSION=9 -DPATCHLEVEL=0 -I../../../../src/include -D_GNU_SOURCE   -c -o keywords.o keywords.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -I../include -I../../../../src/interfaces/ecpg/include -I. -I. -DMAJOR_VERSION=4 -DMINOR_VERSION=9 -DPATCHLEVEL=0 -I../../../../src/include -D_GNU_SOURCE   -c -o c_keywords.o c_keywords.c
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -I../include -I../../../../src/interfaces/ecpg/include -I. -I. -DMAJOR_VERSION=4 -DMINOR_VERSION=9 -DPATCHLEVEL=0 -I../../../../src/include -D_GNU_SOURCE   -c -o ecpg_keywords.o ecpg_keywords.c
 make -C ../../../../src/port all
 make[5]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/port'
 make -C ../backend submake-errcodes
@@ -467,6 +485,7 @@ make[6]: Entering directory `/home/shivam/Courses/cs631/postgresql/src/backend'
 make[6]: Nothing to be done for `submake-errcodes'.
 make[6]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/backend'
 make[5]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/common'
+gcc -O2 -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -g -pthread  -D_REENTRANT -D_THREAD_SAFE -D_POSIX_PTHREAD_SEMANTICS -DECPG_COMPILE -L../../../../src/port -L../../../../src/common -Wl,--as-needed -Wl,-rpath,'/home/shivam/Courses/cs631/postgresql/install/lib',--enable-new-dtags  preproc.o type.o ecpg.o output.o parser.o keywords.o c_keywords.o ecpg_keywords.o kwlookup.o ../ecpglib/typename.o descriptor.o variable.o -lpgport -lpgcommon -lz -lreadline -lcrypt -ldl -lm  -lpthread    -o ecpg
 make[4]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg/preproc'
 make[3]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces/ecpg'
 make[2]: Leaving directory `/home/shivam/Courses/cs631/postgresql/src/interfaces'
