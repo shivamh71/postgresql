@@ -9216,31 +9216,80 @@ simple_select:
 			SELECT opt_distinct target_list
 			into_clause from_clause where_clause
 			group_cube_clause having_clause window_clause
-				{
-					SelectStmt *n = makeNode(SelectStmt);
-					n->distinctClause = $2;
-					n->targetList = $3;
-					n->intoClause = $4;
-					n->fromClause = $5;
-					n->whereClause = $6;
-					n->groupClause = $7;
-					n->havingClause = $8;
-					n->windowClause = $9;
+			{
+				SelectStmt *n = makeNode(SelectStmt);
+				n->distinctClause = $2;
+				n->targetList = $3;
+				n->intoClause = $4;
+				n->fromClause = $5;
+				n->whereClause = $6;
+				n->groupClause = $7;
+				n->havingClause = $8;
+				n->windowClause = $9;
 
-					$7 = list_delete_first($7);
+				$$ = (Node *)n;
+				int l = length($7);
+				int p = 1;
+				int i, deleted, j, tlength, check, glength, k;
+				p = (p << l);
+				p-=2;
+				for(i=p; i>=1; i--){
+					printf("i is %d:\n", i);
+					SelectStmt * n1= makeNode(SelectStmt);
+					List * glist = list_copy($7);
+					deleted = 0;
+					for(j=0;j<l;j++){
+						if(!((i >> j) & 1)){
+							glist = list_delete(glist, list_nth(glist, j-deleted));
+							deleted++;
+						}
+					}
 
-					SelectStmt *nn = makeNode(SelectStmt);
-					nn->distinctClause = $2;
-					nn->targetList = $3;
-					nn->intoClause = $4;
-					nn->fromClause = $5;
-					nn->whereClause = $6;
-					nn->groupClause = $7;
-					nn->havingClause = $8;
-					nn->windowClause = $9;
 
-					$$ = makeSetOp(SETOP_EXCEPT, FALSE, (Node *)n, (Node *)nn);
+					List * tlist = list_copy($3);
+					tlength = length(tlist);
+					glength = length(glist);
+					printf("size of listsdsfaf %d:%d \n " , tlength, glength);
+					for(j=0;j<tlength;j++){
+						check = 0;
+						for(k=0;k<glength;k++){
+							void * a= list_nth(tlist, j);
+							void * b= list_nth(glist, k);
+							printf("kuch chiz\n");
+							printf("name of fields %s:%s\n", parseFieldName(a), parseFieldName(b));
+							if(strcmp(	parseFieldName(a),
+										parseFieldName(b)) == 0){
+								check = 1;
+							}
+						}
+
+						if(check == 0){
+							ResTarget * rt = (ResTarget*)list_nth(tlist,j);
+							rt->type  = T_A_Const;
+							rt->name = (char*)(malloc(1000));
+							printf("printing field nae %s\n", parseFieldName(list_nth(tlist,j)));
+							strcpy(rt->name, parseFieldName(list_nth(tlist,j)));
+							A_Const *nn = makeNode(A_Const);
+							nn->val.type = T_Null;
+							nn->location = 0;
+							rt->val = (Node *)nn;
+						}
+					}
+					printf("size of lists %d:%d \n " , length(glist), length(tlist));
+
+					n1->distinctClause = $2;
+					n1->targetList = tlist;
+					n1->intoClause = $4;
+					n1->fromClause = $5;
+					n1->whereClause = $6;
+					n1->groupClause = glist;
+					n1->havingClause = $8;
+					n1->windowClause = $9;
+
+					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)n1);
 				}
+
+			}
 			| values_clause							{ $$ = $1; }
 			| TABLE relation_expr
 				{
