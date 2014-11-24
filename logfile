@@ -1,11 +1,88 @@
-LOG:  database system was shut down at 2014-11-22 20:23:57 IST
+LOG:  database system was shut down at 2014-11-24 21:27:07 IST
+LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
-accept connections
-ERROR:  column "tem_name" does not exist at character 38
-STATEMENT:  select item_name from sales group by tem_name;
-ERROR:  unrecognized node type: 44767984
-STATEMENT:  select item_name, sum(quantity) from sales group by cube item_name;
-LOG:  received smart shutdown request
-LOG:  autovacuum launcher shutting down
-LOG:  shutting down
-LOG:  database system is shut down
+i is 1:
+in parsing function 1
+field desc : {COLUMNREF :fields ("item_name") :location 71}
+result : item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+name of fields item_name:item_name
+in parsing function 1
+field desc : {COLUMNREF :fields ("item_name") :location 71}
+result : item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+in parsing function 1
+field desc : {COLUMNREF :fields ("item_name") :location 71}
+result : item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+name of fields cloth_size:item_name
+in parsing function 1
+field desc : {COLUMNREF :fields ("item_name") :location 71}
+result : item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+GOING IN FOR cloth_size
+size of lists 1:3 
+ i is 0:
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+GOING IN FOR item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+GOING IN FOR cloth_size
+size of lists 0:3 
+ i is 1:
+in parsing function 1
+field desc : {COLUMNREF :fields ("cloth_size") :location 71}
+result : cloth_size
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+name of fields item_name:cloth_size
+in parsing function 1
+field desc : {COLUMNREF :fields ("cloth_size") :location 71}
+result : cloth_size
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+GOING IN FOR item_name
+in parsing function 1
+field desc : {COLUMNREF :fields ("cloth_size") :location 71}
+result : cloth_size
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+name of fields cloth_size:cloth_size
+in parsing function 1
+field desc : {COLUMNREF :fields ("cloth_size") :location 71}
+result : cloth_size
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+size of lists 1:3 
+ i is 0:
+in parsing function 0
+field desc : {COLUMNREF :fields ("item_name") :location 7}
+result : item_name
+GOING IN FOR item_name
+in parsing function 0
+field desc : {COLUMNREF :fields ("cloth_size") :location 18}
+result : cloth_size
+GOING IN FOR cloth_size
+size of lists 0:3 
+ 

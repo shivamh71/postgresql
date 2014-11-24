@@ -167,9 +167,11 @@ cancel_parser_errposition_callback(ParseCallbackState *pcbstate)
 char*
 parseFieldName(void *field, int flag)
 {
+	printf("in parsing function %d\n",flag);
 	char *name = (char*)malloc(1000*sizeof(char));
 	if(flag==0)	strcpy(name,nodeToString(((ResTarget*)field)->val));
 	else strcpy(name,nodeToString((Node*)field));
+	printf("field desc : %s\n",name);
 	int i=0, p;
 	for(i=0;name[i]!='\0';++i){
 		if(name[i]==':' && name[i+1]=='f' && name[i+2]=='i' && name[i+3]=='e' && name[i+4]=='l' && name[i+5]=='d' && name[i+6]=='s'){
@@ -188,9 +190,25 @@ parseFieldName(void *field, int flag)
 		}
 	}
 	res[j]='\0';
+	printf("result : %s\n",res);
 	return res;
 }
 
+/*
+*	Parse field names for group by cube / rollup clause and check if it corresponds to an aggregate operation
+*/
+int
+isAggregateField(void *field){
+	char *name = (char*)malloc(1000*sizeof(char));
+	strcpy(name,nodeToString(((ResTarget*)field)->val));
+	int i=0;
+	for(i=0;name[i+8]!='\0';++i){
+		if(name[i]==':' && name[i+1]=='f' && name[i+2]=='u' && name[i+3]=='n' && name[i+4]=='c' && name[i+5]=='n' && name[i+6]=='a' && name[i+7]=='m' && name[i+8]=='e'){
+			return 1;
+		}
+	}
+	return 0;
+}
 
 /*
  * Error context callback for inserting parser error location.

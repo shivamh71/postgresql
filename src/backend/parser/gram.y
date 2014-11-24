@@ -333,7 +333,7 @@ static Node *makeRecursiveViewSelect(char *relname, List *aliases, Node *query);
 				target_list insert_column_list set_target_list
 				set_clause_list set_clause multiple_set_clause
 				ctext_expr_list ctext_row def_list indirection opt_indirection
-				reloption_list group_clause group_cube_clause TriggerFuncArgs select_limit
+				reloption_list group_clause group_cube_clause group_rollup_clause TriggerFuncArgs select_limit
 				opt_select_limit opclass_item_list opclass_drop_list
 				opclass_purpose opt_opfamily transaction_mode_list_or_empty
 				OptTableFuncElementList TableFuncElementList opt_type_modifiers
@@ -9227,66 +9227,185 @@ simple_select:
 				n->havingClause = $8;
 				n->windowClause = $9;
 
+				List * tcopy = list_copy($3);
+				List * gcopy = list_copy($7);
+				ListCell * lc;
 				$$ = (Node *)n;
-				int l = length($7);
+				int l = length(gcopy);
 				int p = 1;
 				int i, deleted, j, tlength, check, glength, k;
 				p = (p << l);
 				p-=2;
-				for(i=p; i>=1; i--){
+				List ** tlistArray = (List **)(malloc(p*sizeof(List*)));
+				List ** glistArray = (List **)(malloc(p*sizeof(List*)));
+				int it;
+				for(it=0;it<p;it++) tlistArray[it]=(List*)malloc(sizeof(List*));
+				for(it=0;it<p;it++) glistArray[it]=(List*)malloc(sizeof(List*));
+				SelectStmt ** narray = (SelectStmt **)(malloc(p*sizeof(SelectStmt*)));
+				ResTarget * rt;
+				A_Const * nn;
+				for(i=p; i>=0; i--){
 					printf("i is %d:\n", i);
-					SelectStmt * n1= makeNode(SelectStmt);
-					List * glist = list_copy($7);
+					narray[i] = makeNode(SelectStmt);
+					glistArray[i] = list_copy(gcopy);
 					deleted = 0;
 					for(j=0;j<l;j++){
 						if(!((i >> j) & 1)){
-							glist = list_delete(glist, list_nth(glist, j-deleted));
+							glistArray[i] = list_delete(glistArray[i], list_nth(glistArray[i], j-deleted));
 							deleted++;
 						}
 					}
 
 
-					List * tlist = list_copy($3);
-					tlength = length(tlist);
-					glength = length(glist);
-					printf("size of listsdsfaf %d:%d \n " , tlength, glength);
+					tlistArray[i] = list_copy(tcopy);
+					// printf(" first maadar : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
+					tlength = length(tlistArray[i]);
+					glength = length(glistArray[i]);
+					// printf("size of listsdsfaf %d:%d \n " , tlength, glength);
 					for(j=0;j<tlength;j++){
 						check = 0;
-						for(k=0;k<glength;k++){
-							void * a= list_nth(tlist, j);
-							void * b= list_nth(glist, k);
-							printf("kuch chiz\n");
-							printf("name of fields %s:%s\n", parseFieldName(a), parseFieldName(b));
-							if(strcmp(	parseFieldName(a),
-										parseFieldName(b)) == 0){
-								check = 1;
+						void * a= list_nth(tlistArray[i], j);
+						if(isAggregateField(a) == 1) check = 1;
+						else{
+							for(k=0;k<glength;k++){
+								// printf("important i is %d\n", i);
+								void * b= list_nth(glistArray[i], k);
+								// printf("kuch chiz\n");
+								printf("name of fields %s:%s\n", parseFieldName(a,0), parseFieldName(b,1));
+								// printf("j is %d\n",j);
+								if(isAggregateField(a)==1 || strcmp(	parseFieldName(a,0),
+											parseFieldName(b,1)) == 0){
+									check = 1;
+									break;
+								}
 							}
 						}
-
 						if(check == 0){
-							ResTarget * rt = (ResTarget*)list_nth(tlist,j);
-							rt->type  = T_A_Const;
-							rt->name = (char*)(malloc(1000));
-							printf("printing field nae %s\n", parseFieldName(list_nth(tlist,j)));
-							strcpy(rt->name, parseFieldName(list_nth(tlist,j)));
-							A_Const *nn = makeNode(A_Const);
-							nn->val.type = T_Null;
-							nn->location = 0;
-							rt->val = (Node *)nn;
+							char * scopy = (char *)(malloc(1000));
+							strcpy(scopy, parseFieldName(list_nth(tlistArray[i],j),0));
+							printf("GOING IN FOR %s\n", scopy);
+							lc = tlistArray[i]->head;
+							for(k=0;k<j;k++)
+								lc = lc->next;
+							lc->data.ptr_value = (ResTarget*)(malloc(sizeof(ResTarget)));
+							((ResTarget*)(lc->data.ptr_value))->type = T_A_Const;
+							((ResTarget*)(lc->data.ptr_value))->name = (char*)(malloc(1000));
+							strcpy(((ResTarget*)(lc->data.ptr_value))->name,scopy);	
+							((ResTarget*)(lc->data.ptr_value))->val = makeNode(A_Const);
+							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->val.type = T_Null;
+							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->location=0;
 						}
 					}
-					printf("size of lists %d:%d \n " , length(glist), length(tlist));
+					printf("size of lists %d:%d \n " , length(glistArray[i]), length(tlistArray[i]));
 
-					n1->distinctClause = $2;
-					n1->targetList = tlist;
-					n1->intoClause = $4;
-					n1->fromClause = $5;
-					n1->whereClause = $6;
-					n1->groupClause = glist;
-					n1->havingClause = $8;
-					n1->windowClause = $9;
+					narray[i]->distinctClause = $2;
+					narray[i]->targetList = tlistArray[i];
+					narray[i]->intoClause = $4;
+					narray[i]->fromClause = $5;
+					narray[i]->whereClause = $6;
+					narray[i]->groupClause = glistArray[i];
+					narray[i]->havingClause = $8;
+					narray[i]->windowClause = $9;
+					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)narray[i]);
 
-					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)n1);
+					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i],0)))->val))->val.type==T_Null);
+					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
+
+				}
+
+			}
+			|
+			SELECT opt_distinct target_list
+			into_clause from_clause where_clause
+			group_rollup_clause having_clause window_clause
+			{
+				SelectStmt *n = makeNode(SelectStmt);
+				n->distinctClause = $2;
+				n->targetList = $3;
+				n->intoClause = $4;
+				n->fromClause = $5;
+				n->whereClause = $6;
+				n->groupClause = $7;
+				n->havingClause = $8;
+				n->windowClause = $9;
+
+				List * tcopy = list_copy($3);
+				List * gcopy = list_copy($7);
+				ListCell * lc;
+				$$ = (Node *)n;
+				int l = length(gcopy);
+				int p = l;
+				int i, deleted, j, tlength, check, glength, k;
+				List ** tlistArray = (List **)(malloc(p*sizeof(List*)));
+				List ** glistArray = (List **)(malloc(p*sizeof(List*)));
+				int it;
+				for(it=0;it<p;it++) tlistArray[it]=(List*)malloc(sizeof(List*));
+				for(it=0;it<p;it++) glistArray[it]=(List*)malloc(sizeof(List*));
+				SelectStmt ** narray = (SelectStmt **)(malloc(p*sizeof(SelectStmt*)));
+				ResTarget * rt;
+				A_Const * nn;
+				for(i=p-1; i>=0; i--){
+					printf("i is %d:\n", i);
+					narray[i] = makeNode(SelectStmt);
+					glistArray[i] = list_copy(gcopy);
+					deleted = 0;
+					for(j=l-1;j>=i;j--){
+						glistArray[i] = list_delete(glistArray[i], list_nth(glistArray[i], j));
+					}
+					tlistArray[i] = list_copy(tcopy);
+					// printf(" first maadar : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
+					tlength = length(tlistArray[i]);
+					glength = length(glistArray[i]);
+					// printf("size of listsdsfaf %d:%d \n " , tlength, glength);
+					for(j=0;j<tlength;j++){
+						check = 0;
+						void * a= list_nth(tlistArray[i], j);
+						if(isAggregateField(a) == 1) check = 1;
+						else{
+							for(k=0;k<glength;k++){
+								// printf("important i is %d\n", i);
+								void * b= list_nth(glistArray[i], k);
+								// printf("kuch chiz\n");
+								printf("name of fields %s:%s\n", parseFieldName(a,0), parseFieldName(b,1));
+								// printf("j is %d\n",j);
+								if(isAggregateField(a)==1 || strcmp(	parseFieldName(a,0),
+											parseFieldName(b,1)) == 0){
+									check = 1;
+									break;
+								}
+							}
+						}
+						if(check == 0){
+							char * scopy = (char *)(malloc(1000));
+							strcpy(scopy, parseFieldName(list_nth(tlistArray[i],j),0));
+							printf("GOING IN FOR %s\n", scopy);
+							lc = tlistArray[i]->head;
+							for(k=0;k<j;k++)
+								lc = lc->next;
+							lc->data.ptr_value = (ResTarget*)(malloc(sizeof(ResTarget)));
+							((ResTarget*)(lc->data.ptr_value))->type = T_A_Const;
+							((ResTarget*)(lc->data.ptr_value))->name = (char*)(malloc(1000));
+							strcpy(((ResTarget*)(lc->data.ptr_value))->name,scopy);	
+							((ResTarget*)(lc->data.ptr_value))->val = makeNode(A_Const);
+							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->val.type = T_Null;
+							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->location=0;
+						}
+					}
+					printf("size of lists %d:%d \n " , length(glistArray[i]), length(tlistArray[i]));
+
+					narray[i]->distinctClause = $2;
+					narray[i]->targetList = tlistArray[i];
+					narray[i]->intoClause = $4;
+					narray[i]->fromClause = $5;
+					narray[i]->whereClause = $6;
+					narray[i]->groupClause = glistArray[i];
+					narray[i]->havingClause = $8;
+					narray[i]->windowClause = $9;
+					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)narray[i]);
+
+					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i],0)))->val))->val.type==T_Null);
+					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
+
 				}
 
 			}
@@ -9585,6 +9704,10 @@ group_clause:
 
 group_cube_clause:
 			GROUP_P BY CUBE expr_list 				{ $$ = $4; }
+		;
+
+group_rollup_clause:
+			GROUP_P BY ROLLUP expr_list 				{ $$ = $4; }
 		;
 
 having_clause:

@@ -221,6 +221,8 @@ extern void cancel_parser_errposition_callback(ParseCallbackState *pcbstate);
 
 extern char* parseFieldName(void *field, int flag);
 
+extern int isAggregateField(void *field);
+
 extern Var *make_var(ParseState *pstate, RangeTblEntry *rte, int attrno,
 		 int location);
 extern Oid	transformArrayType(Oid *arrayType, int32 *arrayTypmod);
