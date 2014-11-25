@@ -9217,6 +9217,7 @@ simple_select:
 			into_clause from_clause where_clause
 			group_cube_clause having_clause window_clause
 			{
+				// First group by statement with complete group clause
 				SelectStmt *n = makeNode(SelectStmt);
 				n->distinctClause = $2;
 				n->targetList = $3;
@@ -9226,29 +9227,48 @@ simple_select:
 				n->groupClause = $7;
 				n->havingClause = $8;
 				n->windowClause = $9;
+				$$ = (Node *)n;
 
+
+				// Copying the target list and group clause
 				List * tcopy = list_copy($3);
 				List * gcopy = list_copy($7);
 				ListCell * lc;
-				$$ = (Node *)n;
-				int l = length(gcopy);
-				int p = 1;
-				int i, deleted, j, tlength, check, glength, k;
-				p = (p << l);
-				p-=2;
-				List ** tlistArray = (List **)(malloc(p*sizeof(List*)));
-				List ** glistArray = (List **)(malloc(p*sizeof(List*)));
-				int it;
-				for(it=0;it<p;it++) tlistArray[it]=(List*)malloc(sizeof(List*));
-				for(it=0;it<p;it++) glistArray[it]=(List*)malloc(sizeof(List*));
-				SelectStmt ** narray = (SelectStmt **)(malloc(p*sizeof(SelectStmt*)));
 				ResTarget * rt;
 				A_Const * nn;
-				for(i=p; i>=0; i--){
-					printf("i is %d:\n", i);
+				int l = length(gcopy);
+				int numberOfSubQueries = 1;
+				int i, deleted, j, tlength, check, glength, k, it;
+
+				
+				/*
+				*	Number of sub queries for a group clause of length n would be 2^n
+				*/
+
+				numberOfSubQueries = (numberOfSubQueries << l);
+				numberOfSubQueries-=2;
+				// allocating memory for different target lists and group clauses about to be generated
+				List ** tlistArray = (List **)(malloc(numberOfSubQueries*sizeof(List*)));
+				List ** glistArray = (List **)(malloc(numberOfSubQueries*sizeof(List*)));
+				// allocating memory for different Select Statements about to be generated
+				// The result would be a UNION of the result produced by each of these Select Statements
+				SelectStmt ** narray = (SelectStmt **)(malloc(numberOfSubQueries*sizeof(SelectStmt*)));
+
+				for(it=0;it<numberOfSubQueries;it++){
+					tlistArray[it]=(List*)malloc(sizeof(List*));
+					glistArray[it]=(List*)malloc(sizeof(List*));
+				}
+				
+				// Main Loop: generating different SelectStmt for each group clause
+				for(i=numberOfSubQueries; i>=0; i--){
+					// allocating memory
 					narray[i] = makeNode(SelectStmt);
+
+					// copying the unaltered group clause
 					glistArray[i] = list_copy(gcopy);
 					deleted = 0;
+
+					// modifying the group by clause
 					for(j=0;j<l;j++){
 						if(!((i >> j) & 1)){
 							glistArray[i] = list_delete(glistArray[i], list_nth(glistArray[i], j-deleted));
@@ -9256,48 +9276,62 @@ simple_select:
 						}
 					}
 
-
+					// copying the unaltered target list
 					tlistArray[i] = list_copy(tcopy);
-					// printf(" first maadar : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
 					tlength = length(tlistArray[i]);
 					glength = length(glistArray[i]);
-					// printf("size of listsdsfaf %d:%d \n " , tlength, glength);
+
+					/*
+					*	The target list may change with any change in group by clause
+					*	For eg Lets say the initial target list was: {a,b,sum(d)} and group clause was: {a,b}
+					*	So when the group clause is altered to {a} then a NULL column should be added to the
+					*	target list as a substitute for {b}
+					*/
 					for(j=0;j<tlength;j++){
 						check = 0;
 						void * a= list_nth(tlistArray[i], j);
+						/* 
+						*	Column should be unaffected if it contains an aggregate operation
+						*	Otherwise: Each column in the target list is verified against the
+						*	group clause and NULLified if not present.
+						*/
 						if(isAggregateField(a) == 1) check = 1;
 						else{
 							for(k=0;k<glength;k++){
-								// printf("important i is %d\n", i);
 								void * b= list_nth(glistArray[i], k);
-								// printf("kuch chiz\n");
-								printf("name of fields %s:%s\n", parseFieldName(a,0), parseFieldName(b,1));
-								// printf("j is %d\n",j);
-								if(isAggregateField(a)==1 || strcmp(	parseFieldName(a,0),
-											parseFieldName(b,1)) == 0){
+								if(isAggregateField(a)==1 || strcmp(parseFieldName(a,0),parseFieldName(b,1)) == 0){
 									check = 1;
 									break;
 								}
 							}
 						}
 						if(check == 0){
+							// Name of the to_be_nullified column is figured out and copied into "name"
+							// field of the target list element
 							char * scopy = (char *)(malloc(1000));
 							strcpy(scopy, parseFieldName(list_nth(tlistArray[i],j),0));
-							printf("GOING IN FOR %s\n", scopy);
+							// fetching the Nth target list member
 							lc = tlistArray[i]->head;
 							for(k=0;k<j;k++)
 								lc = lc->next;
+							/*
+							*	Reallocating memory to the Restarget so as to avoid changing members of
+							*	the original target list as the "list_copy()" does a shallow copy
+							*/
 							lc->data.ptr_value = (ResTarget*)(malloc(sizeof(ResTarget)));
-							((ResTarget*)(lc->data.ptr_value))->type = T_A_Const;
 							((ResTarget*)(lc->data.ptr_value))->name = (char*)(malloc(1000));
 							strcpy(((ResTarget*)(lc->data.ptr_value))->name,scopy);	
+
+							/*
+							*	Allocating a new node of type T_A_Const with value as T_Null so as to
+							*	change the value of the target list member to NULL
+							*/
+							((ResTarget*)(lc->data.ptr_value))->type = T_A_Const;
 							((ResTarget*)(lc->data.ptr_value))->val = makeNode(A_Const);
 							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->val.type = T_Null;
 							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->location=0;
 						}
 					}
-					printf("size of lists %d:%d \n " , length(glistArray[i]), length(tlistArray[i]));
-
 					narray[i]->distinctClause = $2;
 					narray[i]->targetList = tlistArray[i];
 					narray[i]->intoClause = $4;
@@ -9307,18 +9341,14 @@ simple_select:
 					narray[i]->havingClause = $8;
 					narray[i]->windowClause = $9;
 					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)narray[i]);
-
-					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i],0)))->val))->val.type==T_Null);
-					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
-
 				}
-
 			}
 			|
 			SELECT opt_distinct target_list
 			into_clause from_clause where_clause
 			group_rollup_clause having_clause window_clause
 			{
+				// First group by statement with complete group clause
 				SelectStmt *n = makeNode(SelectStmt);
 				n->distinctClause = $2;
 				n->targetList = $3;
@@ -9329,60 +9359,94 @@ simple_select:
 				n->havingClause = $8;
 				n->windowClause = $9;
 
+				// Copying the target list and group clause
 				List * tcopy = list_copy($3);
 				List * gcopy = list_copy($7);
 				ListCell * lc;
 				$$ = (Node *)n;
-				int l = length(gcopy);
-				int p = l;
-				int i, deleted, j, tlength, check, glength, k;
-				List ** tlistArray = (List **)(malloc(p*sizeof(List*)));
-				List ** glistArray = (List **)(malloc(p*sizeof(List*)));
-				int it;
-				for(it=0;it<p;it++) tlistArray[it]=(List*)malloc(sizeof(List*));
-				for(it=0;it<p;it++) glistArray[it]=(List*)malloc(sizeof(List*));
-				SelectStmt ** narray = (SelectStmt **)(malloc(p*sizeof(SelectStmt*)));
 				ResTarget * rt;
 				A_Const * nn;
-				for(i=p-1; i>=0; i--){
-					printf("i is %d:\n", i);
+				int l = length(gcopy);
+				int i, deleted, j, tlength, check, glength, k, it;
+
+				/*
+				*	Number of sub queries for a group clause of length n would be 2^n
+				*/
+				int numberOfSubQueries = l;
+				// allocating memory for different Select Statements about to be generated
+				List ** tlistArray = (List **)(malloc(numberOfSubQueries*sizeof(List*)));
+				List ** glistArray = (List **)(malloc(numberOfSubQueries*sizeof(List*)));
+				// The result would be a UNION of the result produced by each of these Select Statements
+				// allocating memory for different target lists and group clauses about to be generated
+				SelectStmt ** narray = (SelectStmt **)(malloc(numberOfSubQueries*sizeof(SelectStmt*)));
+
+				for(it=0;it<numberOfSubQueries;it++){
+					tlistArray[it]=(List*)malloc(sizeof(List*));
+					glistArray[it]=(List*)malloc(sizeof(List*));
+				}
+
+				// Main Loop: generating different SelectStmt for each group clause
+				for(i=numberOfSubQueries-1; i>=0; i--){
+
+					// allocating memory
 					narray[i] = makeNode(SelectStmt);
+
+					// copying the unaltered group clause
 					glistArray[i] = list_copy(gcopy);
 					deleted = 0;
+
+					// modifying the group by clause
 					for(j=l-1;j>=i;j--){
 						glistArray[i] = list_delete(glistArray[i], list_nth(glistArray[i], j));
 					}
+
+					// copying the unaltered target list
 					tlistArray[i] = list_copy(tcopy);
-					// printf(" first maadar : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
 					tlength = length(tlistArray[i]);
 					glength = length(glistArray[i]);
-					// printf("size of listsdsfaf %d:%d \n " , tlength, glength);
+
+					/*
+					*	The target list may change with any change in group by clause
+					*	For eg Lets say the initial target list was: {a,b,sum(d)} and group clause was: {a,b}
+					*	So when the group clause is altered to {a} then a NULL column should be added to the
+					*	target list as a substitute for {b}
+					*/
 					for(j=0;j<tlength;j++){
 						check = 0;
 						void * a= list_nth(tlistArray[i], j);
+						/* 
+						*	Column should be unaffected if it contains an aggregate operation
+						*	Otherwise: Each column in the target list is verified against the
+						*	group clause and NULLified if not present.
+						*/
 						if(isAggregateField(a) == 1) check = 1;
 						else{
 							for(k=0;k<glength;k++){
-								// printf("important i is %d\n", i);
 								void * b= list_nth(glistArray[i], k);
-								// printf("kuch chiz\n");
-								printf("name of fields %s:%s\n", parseFieldName(a,0), parseFieldName(b,1));
-								// printf("j is %d\n",j);
-								if(isAggregateField(a)==1 || strcmp(	parseFieldName(a,0),
-											parseFieldName(b,1)) == 0){
+								if(isAggregateField(a)==1 || strcmp(parseFieldName(a,0),parseFieldName(b,1)) == 0){
 									check = 1;
 									break;
 								}
 							}
 						}
 						if(check == 0){
+							// Name of the to_be_nullified column is figured out and copied into "name"
+							// field of the target list element
 							char * scopy = (char *)(malloc(1000));
 							strcpy(scopy, parseFieldName(list_nth(tlistArray[i],j),0));
-							printf("GOING IN FOR %s\n", scopy);
 							lc = tlistArray[i]->head;
 							for(k=0;k<j;k++)
 								lc = lc->next;
+							/*
+							*	Reallocating memory to the Restarget so as to avoid changing members of
+							*	the original target list as the "list_copy()" does a shallow copy
+							*/
 							lc->data.ptr_value = (ResTarget*)(malloc(sizeof(ResTarget)));
+
+							/*
+							*	Allocating a new node of type T_A_Const with value as T_Null so as to
+							*	change the value of the target list member to NULL
+							*/
 							((ResTarget*)(lc->data.ptr_value))->type = T_A_Const;
 							((ResTarget*)(lc->data.ptr_value))->name = (char*)(malloc(1000));
 							strcpy(((ResTarget*)(lc->data.ptr_value))->name,scopy);	
@@ -9391,8 +9455,6 @@ simple_select:
 							((A_Const*)(((ResTarget*)(lc->data.ptr_value))->val))->location=0;
 						}
 					}
-					printf("size of lists %d:%d \n " , length(glistArray[i]), length(tlistArray[i]));
-
 					narray[i]->distinctClause = $2;
 					narray[i]->targetList = tlistArray[i];
 					narray[i]->intoClause = $4;
@@ -9402,10 +9464,6 @@ simple_select:
 					narray[i]->havingClause = $8;
 					narray[i]->windowClause = $9;
 					$$ = makeSetOp(SETOP_UNION, TRUE, $$, (Node *)narray[i]);
-
-					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i],0)))->val))->val.type==T_Null);
-					// printf(" first : %d\n",((A_Const*)(((ResTarget*)(list_nth(tlistArray[i+1],0)))->val))->val.type==T_Null);
-
 				}
 
 			}
